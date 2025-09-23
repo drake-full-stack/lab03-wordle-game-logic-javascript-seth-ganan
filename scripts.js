@@ -129,6 +129,8 @@ function submitGuess() {
     // TODO: Check lose condition: if currentRow >= 6, set gameOver = true
     // TODO: Show appropriate alert for win/lose (use setTimeout for smoother experience)
     // TODO: Log current game status (won/lost/continuing)
+    //This is a test comment
+    
 }
 
 
