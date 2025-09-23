@@ -122,6 +122,48 @@ if (currentTile <= 0) {
     logDebug('The Current word is:' + getCurrentWord(), 'info');
 }
 
+// TODO: Implement submitGuess function
+function submitGuess() {
+    logDebug(`📝 submitGuess() called`, 'info');
+    
+    if (currentTile !== 5) {
+        logDebug("Row has less than 5 letters", 'error');
+        return;
+    }
+
+    const currentRowElement = rows[currentRow];
+    const tiles = currentRowElement.querySelectorAll('.tile');
+    let guess = '';
+    for (const tile of tiles) {
+        guess += tile.textContent;
+    }
+    logDebug('The guess is ' + guess, 'info');
+    logDebug('The target word is ' + TARGET_WORD, 'info');
+    const result = checkGuess(guess, tiles);
+
+    currentRow++;
+    currentTile = 0;
+
+    if (guess === TARGET_WORD) {
+        gameOver = true;
+        logDebug("player is amazing at wordle", 'success');
+    } else if (currentRow >= 6) {
+        gameOver = true;
+        logDebug("Player is not good at wordle", 'error');
+    }
+
+    if (gameOver) {
+        setTimeout(() => {
+            if (guess === TARGET_WORD) {
+                alert("Wow, You Just Did a Wordle, That's Crazy!");
+            } else {
+                alert("Wow, You Really Suck At Wordle. I Can't Believe You Are This Bad. The word was " + TARGET_WORD);
+            }
+        }, 100);
+    }
+}
+
+
 
     // TODO: Apply CSS classes to tiles -- we'll do this in the next step
     for (let i = 0; i < 5; i++) {
