@@ -164,6 +164,39 @@ function submitGuess() {
 }
 
 
+// TODO: Implement checkGuess function (the hardest part!)
+function checkGuess(guess, tiles) {
+    logDebug(`🔍 Starting analysis for "${guess}"`, 'info');
+    
+    // TODO: Split TARGET_WORD and guess into arrays
+    const target = TARGET_WORD.split('');
+    const guessArray = guess.split('');
+    const result = ['absent', 'absent', 'absent', 'absent', 'absent'];
+    
+    // STEP 1: Find exact matches
+    for (let i = 0; i < 5; i++) {
+        if (target[i] === guessArray[i]) {
+            result[i] = 'correct';
+            // TODO: mark both target[i] and guessArray[i] as used (null)
+            target[i] = null;
+            guessArray[i] = null;
+        }
+    }
+    
+    // STEP 2: Find wrong position matches  
+    for (let i = 0; i < 5; i++) {
+        if (guessArray[i] !== null) { // only check unused letters
+            // TODO: look for guessArray[i] in remaining target letters
+            const index_of_guess = target.indexOf(guessArray[i]);
+
+            // TODO: if found, mark as 'present' and set target position to null
+            if (index_of_guess !== -1) {
+                result[i] = 'present';
+                target[index_of_guess] = null;
+            }
+        }
+    }
+
 
     // TODO: Apply CSS classes to tiles -- we'll do this in the next step
     for (let i = 0; i < 5; i++) {
