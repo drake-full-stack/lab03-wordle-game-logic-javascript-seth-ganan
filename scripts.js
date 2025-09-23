@@ -102,6 +102,25 @@ function addLetter(letter) {
     logDebug('The Current word is:' + getCurrentWord(), 'info');
 }
 
+// TODO: Implement deleteLetter function  
+function deleteLetter() {
+    logDebug(`🗑️ deleteLetter() called`, 'info');
+    
+if (currentTile <= 0) {
+        logDebug("Dummy you've got no letters in there", 'error');
+        return;    // TODO: If no letters, log error message and return early
+}
+    currentTile--;
+    const currentRowElement = rows[currentRow];
+    const tiles = currentRowElement.querySelectorAll('.tile');
+    const tile = tiles[currentTile];
+    const deleted = tile.textContent;
+    tile.textContent = '';
+    tile.classList.remove("filled");
+    // TODO: Log what was deleted and from which position
+    logDebug('You have just deleted ' + deleted + ' from position ' + currentTile, 'success');
+    logDebug('The Current word is:' + getCurrentWord(), 'info');
+}
 
 
     // TODO: Apply CSS classes to tiles -- we'll do this in the next step
